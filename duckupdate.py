@@ -3,7 +3,7 @@ from time import sleep
 import logging
 from configparser import ConfigParser
 
-configfile_name = "duckupdate.conf"
+configfile_name = "/etc/duckupdate.conf"
 config = ConfigParser()
 config.read_file(open(configfile_name))
 
