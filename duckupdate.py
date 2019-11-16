@@ -31,7 +31,6 @@ def getExternalIP():
 def updateDuckDNS(external_ip, domain, token):
     result = httprequest(UPDATEURL.format(ip=external_ip, domain=domain,
                                           token=token))
-    logging.debug(result)
     return result.split()[0], result.split()[-1] 
         
 def update():
@@ -39,10 +38,12 @@ def update():
     logging.info('Query External IP ...')
     external_ip = getExternalIP()
     if external_ip:
-        logging.info('external ip : {} '.format(external_ip)) 
+        logging.info('external ip: {} '.format(external_ip)) 
         res, status = updateDuckDNS(external_ip, DOMAIN, TOKEN)
         if res == 'OK':
-            logging.info('external ip : {extip} status : {stat}'.format(extip=external_ip, stat=status))
+            logging.info('external ip: {extip} domain: {domain} status: {stat}'.format(extip=external_ip, 
+                                                                                         stat=status,
+                                                                                         domain=DOMAIN))
         else:
             logging.error('Bad Response ')
 
