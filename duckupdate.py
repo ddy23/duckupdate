@@ -11,7 +11,7 @@ DOMAIN = config['DEFAULT']['DOMAIN']
 TOKEN = config['DEFAULT']['TOKEN']
 SLEEPTIME = config['DEFAULT']['SLEEPTIME']
 
-UPDATEURL = 'https://www.duckdns.org/update?domains={domain}&token={token}&ip={external_ip}&verbose=true&clear=true'
+UPDATEURL = 'https://www.duckdns.org/update?domains={domain}&token={token}&ip={ip}&verbose=True'
 
 def httprequest(url):
     try:
@@ -29,9 +29,9 @@ def getExternalIP():
     return httprequest('https://ident.me')
 
 def updateDuckDNS(external_ip, domain, token):
-    result = httprequest(UPDATEURL.format(external_ip=external_ip, 
-                                          domain=domain,
+    result = httprequest(UPDATEURL.format(ip=external_ip, domain=domain,
                                           token=token))
+    logging.debug(result)
     return result.split()[0], result.split()[-1] 
         
 def update():
